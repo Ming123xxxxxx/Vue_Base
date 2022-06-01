@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script type="text/javascript" src="../../VueJs/vue.js"></script>
+    <!--设置ico-->
+    <link rel="shortcut icon" href="static/favicon.ico"/>
+</head>
+<body>
+<div id="root">
+    <h2 v-pre>不变</h2>
+    <h2 v-pre>当前的n值是:{{n}}</h2>
+    <button v-pre @click="n++">n+1</button>
+</div>
+<script type="text/javascript">
+    new Vue({
+        el: "#root",
+        data: function () {
+            return {
+                n:1
+            }
+        }
+    })
+</script>
+</body>
+</html>

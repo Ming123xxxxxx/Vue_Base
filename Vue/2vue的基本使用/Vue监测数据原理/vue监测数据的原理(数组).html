@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script type="text/javascript" src="../../../VueJs/vue.js"></script>
+    <!--设置ico-->
+    <link rel="shortcut icon" href="../static/favicon.ico"/>
+</head>
+<body>
+<div id="root">
+    <h2>My friends</h2>
+    <ul :style="styleObject" v-for="(f,index) in friends">
+        name : {{f.name}} -- age : {{f.age}}
+    </ul>
+
+    <h2>My Hobbys</h2>  <button @click="addno">添加爱好但无法显示</button>  <button @click="addyes">添加爱好并且显示</button>
+    <ul :style="styleObject" v-for="(h,index) in hobby" :key="index">
+        {{h}}
+    </ul>
+</div>
+<script type="text/javascript">
+    const vm = new Vue({
+        el: "#root",
+        data: function () {
+            return {
+                styleObject: {
+                    listStyle: "none"
+                },
+                friends: [
+                    {name: "tom", age: 29},
+                    {name: "jerry", age: 43},
+                    {name: "lucy", age: 33}
+                ],
+                hobby: ['a', 'b', 'c']
+            }
+        },
+        methods:{
+            //此添加方式无法被vuej建听到,因此只添加数据不进行页面渲染
+            addno(){
+                this.hobby[this.hobby.length]=Math.random()
+            },
+            //put(),pop(),shift(),unshift(),splice(),sirt(),reverse()这些方法添加数据可以被vue所监听到
+            //因此既可以添加数据,又会页面渲染
+            addyes(){
+                this.hobby.push(Math.random())
+            }
+        }
+    })
+</script>
+</body>
+</html>

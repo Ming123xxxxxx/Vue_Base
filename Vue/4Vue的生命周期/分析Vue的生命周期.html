@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script type="text/javascript" src="../../VueJs/vue.js"></script>
+    <!--设置ico-->
+    <link rel="shortcut icon" href="static/favicon.ico"/>
+</head>
+<body>
+<div id="root">
+    <h2>当前的n值是: {{n}}</h2>
+    <button @click="add">n+1</button><br><br>
+    <button @click="deleten">删除vm</button>
+</div>
+<script type="text/javascript">
+    new Vue({
+        el: "#root",
+        data: function () {
+            return {
+                n: 1
+            }
+        },
+        methods: {
+            add() {
+                console.log("add()...")
+                this.n += 1
+            },
+            deleten(){
+                console.log("deleten()")
+                this.$destroy()
+            }
+        },
+        watch:{
+          n:{
+              handler(){
+                  console.log("n发生改变...")
+              }
+          }
+        },
+        beforeCreate() {
+            console.log("beforeCreate")
+        },
+        created() {
+            console.log("created")
+        },
+        beforeMount() {
+            console.log("beforeMount")
+        },
+        mounted() {
+            console.log("mounted")
+        },
+        beforeUpdate() {
+            console.log("beforeUpdate")
+        },
+        updated() {
+            console.log("updated")
+        },
+        beforeDestroy() {
+            console.log("beforeDestroy")
+        },
+        destroyed() {
+            console.log("destroyed")
+        }
+
+    })
+</script>
+</body>
+</html>

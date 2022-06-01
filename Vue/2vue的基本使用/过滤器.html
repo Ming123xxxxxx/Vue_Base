@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script type="text/javascript" src="../../VueJs/vue.js"></script>
+    <script type="text/javascript" src="../../VueJs/dayjs.js"></script>
+    <!--设置ico-->
+    <link rel="shortcut icon" href="static/favicon.ico"/>
+</head>
+<body>
+<div id="root">
+    <h2>时间:{{time}}</h2>
+    <h2>格式化时间(computed):{{fmtTime}}</h2>
+    <h2>格式化时间(methods):{{mtime()}}</h2>
+    <!--过滤器实现-->
+    <h2>格式化时间(过滤器不带参):{{time | timeformater}}</h2>
+    <h2>格式化时间(过滤器带参):{{time | timeformater('YYYY-MM-DD')}}</h2>
+    <h2 :x="dates | myslice">xx</h2>
+    <h2>格式化时间(过滤器带参并只返回前四位):{{time | timeformater('YYYY-MM-DD') | myslice()}}</h2>
+</div>
+
+<div id="root2">
+    <h2>全局过滤器的体现:{{msg | myslice()}}</h2>
+</div>
+
+<script type="text/javascript">
+
+    //定义一个全局过滤器
+    Vue.filter('myslice', function (value) {
+        return value.slice(0, 4)
+    })
+
+    new Vue({
+        el: "#root",
+        data: function () {
+            return {
+                time: 1411231131112,//时间戳
+                dates:"areyouok?"
+            }
+        },
+        computed: {
+            fmtTime() {
+                return dayjs(this.time).format('YYYY-MM-DD HH:mm:ss');
+            }
+        },
+        methods: {
+            mtime() {
+                return dayjs(this.time).format('YYYY-MM-DD HH:mm:ss');
+            }
+        },
+        //局部过滤器
+        //过滤器实现
+        filters: {
+            timeformater(value, str = 'YYYY-MM-DD HH:mm:ss') {
+                return dayjs(value).format(str);
+
+            }
+        }
+    })
+
+    new Vue({
+        el: "#root2",
+        data: function () {
+            return {
+                msg: "hellowrod"
+            }
+        }
+    })
+
+</script>
+</body>
+</html>

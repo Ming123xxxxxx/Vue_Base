@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script type="text/javascript" src="../../VueJs/vue.js"></script>
+    <!--设置ico-->
+    <link rel="shortcut icon" href="static/favicon.ico"/>
+</head>
+<body>
+    <div id="root">
+        单向数据绑定:<input type="text" v-bind:value="name"><br/>
+        <br>
+
+        <input v-model:value="name" id="ip" readonly style="margin-left:100px;height: 30px;display: none">
+        <br>
+
+        双向数据绑定:<input type="text" v-model:value="name" onblur="h()" onfocus="s()"><br/>
+
+        <!--如下代码是错误的.v-model只能应用在表单类元素上-->
+<!--        <h2 v-model="name">Hello</h2>-->
+    </div>
+
+    <script type="text/javascript">
+        
+        function s() {
+            console.log(document.getElementById("ip").value);
+            document.getElementById("ip").style.display="block";
+        }
+        function h() {
+            document.getElementById("ip").style.display="none";
+        }
+
+          new Vue({
+              el:"#root",
+              data: {
+                  name:"Vue"
+              }
+          })
+    </script>
+</body>
+</html>

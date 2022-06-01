@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script type="text/javascript" src="../../VueJs/vue.js"></script>
+    <!--设置ico-->
+    <link rel="shortcut icon" href="static/favicon.ico"/>
+</head>
+<body>
+
+     <div id="root">
+         <h2>Hello,{{name}}</h2>
+         <input type="text" placeholder="按下enter提示输入" @keyup.enter="showInfo">
+         <!--tab必须搭配keydown时候,否则无法触发事件-->
+         <input type="text" placeholder="按下tab提示输入" @keydown.tab="showInfo">
+         <!--若使用ctrl,alt,shift,meta键,
+             1.配合Keyup时,需要按下这几个建的同时再按下其他键后释放其他键,事件才触发
+         -->
+         <input type="text" placeholder="按下ctrl+任意键后释放任意键提示输入" @keyup.ctrl="showInfo">
+         <!--指定ctrl+y才能触发事件-->
+         <input type="text" placeholder="按下ctrl+y后释放y提示输入" @keyup.ctrl.y="showInfo">
+         <!--自定义按键-->
+         <input type="text" placeholder="按下enter任意键后释放任意键提示输入" @keyup.huiche="showInfo">
+     </div>
+
+     <script type="text/javascript">
+         //自定义按键
+         Vue.config.keyCodes.huiche=13//定义一个别名为huiche的按键,其按键keycode为13,也就是entera的keycode
+         new Vue({
+             el:"#root",
+             data:function () {
+                 return{
+                     name:"Vue"
+                 }
+             },
+             methods:{
+                 showInfo(e){
+                    console.log(e.target.value)
+                 }
+             }
+         })
+     </script>
+
+</body>
+</html>

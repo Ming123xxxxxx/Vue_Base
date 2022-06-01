@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script type="text/javascript" src="../../VueJs/vue.js"></script>
+    <!--设置ico-->
+    <link rel="shortcut icon" href="static/favicon.ico"/>
+</head>
+<body>
+    <div id="root">
+        <h2>姓名: {{name}}</h2>
+        <h2>地址: {{address}}</h2>
+    </div>
+
+    <script type="text/javascript">
+      const vm = new Vue({
+            el:"#root",
+            data:function () {
+                return{
+                    name:"ming",
+                    address: "瑞昌"
+                }
+            }
+        })
+        console.log(vm);
+    </script>
+
+</body>
+</html>

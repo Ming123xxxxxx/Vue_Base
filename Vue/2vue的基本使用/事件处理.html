@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script type="text/javascript" src="../../VueJs/vue.js"></script>
+    <!--设置ico-->
+    <link rel="shortcut icon" href="static/favicon.ico"/>
+</head>
+<body>
+<div id="root">
+    <h2>随机生成: {{name}}</h2>
+    <!--v-on书写方式一-->
+    <button v-on:click="showInfo">点我提示信息</button>
+    <!--v-on书写方式二-->
+    <button @click="showInfo">点我提示信息</button>
+    <!--v-on传参方式一,此方式会导致函数中event失效-->
+    <button @click="showInfo2(88)">点我提示信息</button>
+    <!--v-on传参方式二-->
+    <button @click="showInfo3(8080,$event)">点我提示信息</button>
+</div>
+
+<script type="text/javascript">
+    const  vm = new Vue({
+        el: "#root",
+        data: function () {
+            return {
+                name: "Vue"
+            }
+        },
+        methods: {
+            showInfo(event) {
+                this._data.name=Math.random();
+            },
+            showInfo2(number) {
+                this._data.name=number;
+                console.log(event.target.innerText)
+            },
+            showInfo3(number,event) {
+                console.log(event.target.innerText)
+                this._data.name=number;
+            }
+        }
+    })
+</script>
+
+</body>
+</html>

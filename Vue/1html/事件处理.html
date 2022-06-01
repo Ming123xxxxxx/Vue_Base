@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="../../VueJs\vue.js"></script>
+</head>
+<body>
+
+<div id="root">
+    <h2>学校名称:{{name}}</h2>
+    <h2>学校地址:{{address}}</h2>
+    <button v-on:click="showInfo">点我提示信息</button><br><br>
+    <button @click="showInfo">点我提示信息</button><br><br>
+    <button @click="showInfo2(44)">点我提示数字</button><br><br>
+    <button @click="showInfo3(44,$event)">点我提示数字和信息</button>
+</div>
+
+<script type="text/javascript">
+
+    Vue.config.productionTip = false;//阻止vue在启动时出现生产提示
+    const vm = new Vue({
+        el:'#root',
+        data:{
+            name:'瑞昌二中',
+            address:'江西省九江市瑞昌县',
+        },
+        methods:{
+            showInfo(){
+                alert("v-on的使用")
+            },
+
+            showInfo2(number){
+                alert(number);
+            },
+
+            showInfo3(number,a){
+                alert(number+a.target.innerHTML);
+            }
+
+        }
+    })
+</script>
+
+</body>
+</html>

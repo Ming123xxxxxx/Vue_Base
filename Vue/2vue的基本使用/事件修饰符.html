@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script type="text/javascript" src="../../VueJs/vue.js"></script>
+    <!--设置ico-->
+    <link rel="shortcut icon" href="static/favicon.ico"/>
+</head>
+<body>
+<div id="root">
+    <h2>Hello,{{name}}</h2>
+    <!-- prevent:阻止默认事件 -->
+    <a href="http://www.baidu.com" @click.prevent="showInfo">prevent</a>
+    <!-- stop:阻止事件冒泡 -->
+    <div @click="showInfo">
+        <!--事件修饰符也可以连写-->
+        <a href="http://www.baidu.com" @click.stop.prevent="showInfo1">stop</a>
+    </div>
+    <!--once:事件只触发一次-->
+    <a href="http://www.baidu.com" @click.once.prevent="showInfo2">{{once}}</a>
+    <!--capture:使用事件的捕获模式-->
+    <div @click.capture="showInfo3(1)" style="background-color: red;height: 80px" >
+        <div @click="showInfo3(2)" style="background-color: yellowgreen;height: 40px"></div>
+    </div>
+
+</div>
+
+<script type="text/javascript">
+    const v = new Vue({
+        el:"#root",
+        data:function () {
+            console.log("此处的this是:",this)
+            return {
+                name:"Vue",
+                once:"once"
+            }
+        },
+        methods:{
+            showInfo(e){
+                alert("prevent")
+            },
+            showInfo1(e){
+                alert("stop")
+            },
+            showInfo2(e){
+                this._data.once="此链接只生效一次"
+            },
+            showInfo3(number){
+                alert(number)
+            }
+        }
+    })
+</script>
+
+</body>
+</html>

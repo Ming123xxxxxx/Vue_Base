@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script type="text/javascript" src="../../VueJs/vue.js"></script>
+    <!--设置ico-->
+    <link rel="shortcut icon" href="static/favicon.ico"/>
+</head>
+<body>
+<div id="root">
+    <input type="text" placeholder="输入关键字查询" v-model="keyWord">
+    <ul :style="styleObject">
+        <li v-for="(p,index) in filterPersons" :key="p.id">
+            {{p.name}} - {{p.age}} - {{p.sex}}
+        </li>
+    </ul>
+</div>
+<script type="text/javascript">
+    new Vue({
+        el: "#root",
+        data: function () {
+            return {
+                <!--遍历数组-->
+                keyWord: '',
+                persons: [
+                    {id: '001', name: "马冬梅", age: 18, sex: '女'},
+                    {id: '002', name: "周冬雨", age: 38, sex: '女'},
+                    {id: '003', name: "周杰伦", age: 48, sex: '男'},
+                    {id: '004', name: "温兆伦", age: 58, sex: '男'}
+                ],
+                //使用watch实现列表过滤
+                // filterPersons: [],
+                styleObject: {
+                    listStyle: "none"
+                }
+            }
+        },
+        //使用watch实现列表过滤
+        // watch: {
+        //     keyWord: {
+        //         immediate:true,
+        //         handler(value) {
+        //             this.filterPersons = this.persons.filter((p) => {
+        //                 return p.name.indexOf(value) != -1
+        //             })
+        //         }
+        //     }
+        // }
+
+        //使用computed实现列表过滤
+        computed:{
+            filterPersons(){
+                return this.persons.filter((p)=>{
+                    return p.name.indexOf(this.keyWord) !=-1;
+                })
+            }
+        }
+    })
+</script>
+</body>
+</html>

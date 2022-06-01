@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script type="text/javascript" src="../../../VueJs/vue.js"></script>
+    <!--设置ico-->
+    <link rel="shortcut icon" href="static/favicon.ico"/>
+</head>
+<body>
+<div id="root">
+    姓:<input type="text" v-model="firstName"><br>
+    名:<input type="text" v-model="lastName"><br>
+    姓名:{{fullname}}<br>
+    姓名:{{fullname}}<br>
+    姓名:{{fullname}}<br>
+    姓名:{{fullname}}
+</div>
+
+<script type="text/javascript">
+    const vm = new Vue({
+        el: "#root",
+        data: function () {
+            return {
+                firstName: "张",
+                lastName: "三"
+            }
+        },
+        computed: {
+            fullname: {
+                //get()作用:当有人读取fullName时,get就会被调用,且返回值就作为fullName的值
+                //get()什么时候调用:
+                //1.初次读取fullname时  2.所依赖的数据发生变化时,此处的依赖的数据为firstName和lastName
+                get() {
+                    console.log("get()...")
+                    //此处的this仍是vm
+                    return this._data.firstName +"-"+ this._data.lastName
+                },
+                //当fullname被修改时,set()会被调用
+                set(value) {
+                    console.log("set()...",value)
+                    const arr = value.split("-")
+                    this.firstName=arr[0];
+                    this.lastName=arr[1]
+
+                }
+            }
+        }
+
+    })
+</script>
+
+</body>
+</html>

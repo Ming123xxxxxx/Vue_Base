@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script type="text/javascript" src="../../../VueJs/vue.js"></script>
+    <!--设置ico-->
+    <link rel="shortcut icon" href="../static/favicon.ico"/>
+</head>
+<body>
+<div id="root">
+    <button @click="updatema">更新马冬梅信息</button>
+    <ul :style="styleObject">
+        <li v-for="(p,index) in persons" :key="p.id">
+            {{p.name}} - {{p.age}} - {{p.sex}}
+        </li>
+    </ul>
+</div>
+<script type="text/javascript">
+   const vm = new Vue({
+        el: "#root",
+        data: function () {
+            return {
+                <!--遍历数组-->
+                persons: [
+                    {id: '001', name: "马冬梅", age: 58, sex: '女'},
+                    {id: '002', name: "周冬雨", age: 38, sex: '女'},
+                    {id: '003', name: "周杰伦", age: 28, sex: '男'},
+                    {id: '004', name: "温兆伦", age: 58, sex: '男'}
+                ],
+                styleObject: {
+                    listStyle: "none"
+                }
+            }
+        },
+        methods:{
+            updatema(){
+                //此赋值方式生效
+                // this.persons[0].name="马老师"
+                // this.persons[0].age=70
+                // this.persons[0].sex="男"
+
+                //vm中数据改变了,但是vue并没识别到数据改变
+                this.persons[0] = {id: '001', name: "马老师", age: 70, sex: '男'}
+
+            }
+        }
+    })
+</script>
+</body>
+</html>

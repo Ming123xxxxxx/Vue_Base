@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script type="text/javascript" src="../../VueJs/vue.js"></script>
+    <!--设置ico-->
+    <link rel="shortcut icon" href="static/favicon.ico"/>
+</head>
+<body>
+<div id="root">
+    <h2 :style="{opacity}">Hello,Vue</h2>
+</div>
+<script type="text/javascript">
+    new Vue({
+        el: "#root",
+        data: function () {
+            return {
+                opacity:1
+            }
+        },
+        methods:{
+
+        },
+        //mounted():在Vue完成模板的解析并把初始的真实的DOM元素放入页面后(挂在完毕)调用mounted
+        mounted(){
+                setInterval(()=>{
+                    this.opacity-=0.01;
+                    if(this.opacity<=0){
+                        this.opacity=1
+                    }
+                },16)
+        }
+    })
+</script>
+</body>
+</html>

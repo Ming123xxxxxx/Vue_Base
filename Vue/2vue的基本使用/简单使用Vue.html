@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script type="text/javascript" src="../../VueJs/vue.js"></script>
+    <!--设置ico-->
+    <link rel="shortcut icon" href="static/favicon.ico"/>
+</head>
+<body>
+<!--准备一个容器-->
+<div id="root">
+    <h1>Hello,{{name.toUpperCase()}}</h1>
+
+    <a v-bind:href="list.url" v-bind:x="list.ppp" :p="list.xxx">{{list.name}}</a>
+</div>
+
+<script type="text/javascript">
+    Vue.config.productionTip = false//阻止vue在启动时生成生产提示
+    //创建vue实例
+    new Vue({
+        el: '#root',//el指定当前Vue实例为哪个容器服务,值通常为css选择器字符串
+        data://data中用于存储数据,数据供el所指定的容器去使用
+            {
+                name: "Vue",
+                list:{
+                    url: "http://www.baidu.com",
+                    name:"百度",
+                    ppp: "跳转百度",
+                    xxx: "v-bind:缩写为:"
+                },
+
+            }
+    });
+
+</script>
+</body>
+</html>

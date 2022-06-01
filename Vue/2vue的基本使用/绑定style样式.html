@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script type="text/javascript" src="../../VueJs/vue.js"></script>
+    <!--设置ico-->
+    <link rel="shortcut icon" href="static/favicon.ico"/>
+</head>
+<body>
+<div id="root">
+    <!--对象写法-->
+    <h2 :style="StyleObject">Hello,{{name}}</h2>
+    <!--数组写法-->
+    <h2 :style="StyleArr">Hello,{{authors}}</h2>
+</div>
+<script type="text/javascript">
+    new Vue({
+        el: "#root",
+        data: function () {
+            return {
+                name: "Vue",
+                authors: "Ming",
+                <!--对象写法-->
+                StyleObject: {
+                        //css中的样式中带"-"的在这里"-"后一位字母大写且"-"省略
+                        //如,line-height这里要写成lineHeight
+                        fontSize: '50px',
+                        color: "green",
+                        fontWeight: 800
+                    },
+                StyleArr:[
+                    {
+                        color:"red",
+                        fontWeight:600
+                    },
+                    {
+                        fontSize:"20px"
+                    }
+                ]
+            }
+        }
+    })
+</script>
+
+</body>
+</html>

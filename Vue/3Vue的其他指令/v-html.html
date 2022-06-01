@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script type="text/javascript" src="../../VueJs/vue.js"></script>
+    <!--设置ico-->
+    <link rel="shortcut icon" href="static/favicon.ico"/>
+</head>
+<body>
+<div id="root">
+    <h2>Hello,{{name}}</h2>
+    <h2 v-html="name">xxx</h2>
+    <h2 v-html="str">xxx</h2>
+</div>
+<script type="text/javascript">
+    new Vue({
+        el: "#root",
+        data: function () {
+            return {
+                name:"Vue",
+                str:"<i>v-html</i>"
+            }
+        }
+    })
+</script>
+</body>
+</html>

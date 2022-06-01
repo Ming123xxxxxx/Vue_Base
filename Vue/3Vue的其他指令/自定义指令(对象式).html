@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script type="text/javascript" src="../../VueJs/vue.js"></script>
+    <!--设置ico-->
+    <link rel="shortcut icon" href="static/favicon.ico"/>
+</head>
+<body>
+<div id="root">
+    <h2>当前的值是:<span v-text="n"></span></h2>
+    <button @click="n++">n+1</button><br><br>
+    <!--自定义一个指令v-fbind，使其可让所绑定的input元素默认获取焦点-->
+    <input type="text" v-fbind="n">
+</div>
+<div id="root2">
+    <input type="text" v-fbind="m">
+</div>
+<script type="text/javascript">
+
+    //定义一个全局指令
+    Vue.directive('fbind',{
+            //bind():指令与元素成功绑定时调用
+            bind(element, binding) {
+                element.value = binding.value
+            },
+            //指令所在元素被插入页面时调用
+            inserted(element, binding) {
+                element.focus()
+            },
+            //指令所在的模板被重新解析时调用
+            update(element, binding) {
+                element.value = binding.value
+                element.focus()
+    }})
+
+    new Vue({
+        el: "#root",
+        data: function () {
+            return {
+                n: 1
+            }
+        },
+        //定义一个局部指令
+        directives: {
+            // fbind: {
+            //     //bind():指令与元素成功绑定时调用
+            //     bind(element, binding) {
+            //         element.value = binding.value
+            //     },
+            //     //指令所在元素被插入页面时调用
+            //     inserted(element, binding) {
+            //         element.focus()
+            //     },
+            //     //指令所在的模板被重新解析时调用
+            //     update(element, binding) {
+            //         element.value = binding.value
+            //         element.focus()
+            //     }
+            // }
+        }
+    })
+    new Vue({
+        el:"#root2",
+        data:function () {
+            return{
+                m:100
+            }
+        }
+    })
+</script>
+</body>
+</html>

@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script type="text/javascript" src="../../../VueJs/vue.js"></script>
+    <!--设置ico-->
+    <link rel="shortcut icon" href="static/favicon.ico"/>
+</head>
+<body>
+
+<div id="root">
+    <h2>今天天气{{changeweather}}</h2>
+    <button @click="change">点我切换天气</button>
+</div>
+
+<script type="text/javascript">
+    const vm = new Vue({
+        el: "#root",
+        data: function () {
+            return {
+                isHot: false
+            }
+        },
+        methods: {
+            change() {
+                this.isHot = !this.isHot
+            }
+        },
+        computed: {
+            changeweather: function () {
+                return this.isHot ? "炎热" : "凉爽"
+            }
+        },
+        //监视属性,写法一
+        watch: {
+            //监视定义的属性
+            isHot: {
+                immediate: true,//初始化时让handler调用一下
+                //handler()当weather发生改变时调用
+                handler(newValue, oldValue) {
+                    console.log("isHot发生改变", newValue, oldValue)
+                }
+            },
+            //监视计算属性
+            changeweather: {
+                immediate: true,//初始化时让handler调用一下
+                //handler()当weather发生改变时调用
+                handler(newValue, oldValue) {
+                    console.log("changeweather发生改变", newValue, oldValue)
+                }
+            }
+        }
+    })
+
+            // //监视属性,写法二
+            // vm.$watch('isHot',{
+            //     //监视定义的属性
+            //     isHot: {
+            //         immediate: true,//初始化时让handler调用一下
+            //         //handler()当weather发生改变时调用
+            //         handler(newValue, oldValue) {
+            //             console.log("isHot发生改变", newValue, oldValue)
+            //         }
+            //     }
+            // })
+</script>
+
+</body>
+</html>

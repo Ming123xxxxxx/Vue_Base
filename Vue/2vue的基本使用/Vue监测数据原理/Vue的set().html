@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script type="text/javascript" src="../../../VueJs/vue.js"></script>
+    <!--设置ico-->
+    <link rel="shortcut icon" href="../static/favicon.ico"/>
+</head>
+<body>
+<div id="root">
+    <br>
+    <button @click="addsex">点我添加/更换性别,默认为男</button>
+    <h2>name: {{student.name}}</h2>
+    <h2 v-if="student.sex!=undefined"> sex: {{student.sex}}</h2>
+</div>
+<script type="text/javascript">
+    const  vm = new Vue({
+        el: "#root",
+        data: function () {
+            return {
+                student: {
+                    name: "ming"
+                }
+            }
+        },
+        methods: {
+            addsex() {
+                if(this.student.sex==undefined){
+                    Vue.set(this.student,'sex', "男")
+                }else {
+                    this.student.sex=="男"?this.student.sex="女" : this.student.sex="男"
+                }
+            }
+        }
+    })
+</script>
+</body>
+</html>

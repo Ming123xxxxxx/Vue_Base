@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script type="text/javascript">
+        let data = {
+            name:"ming",
+            address:'wuhan'
+        }
+
+        //创建一个监视的实例对象,用于监视data中属性的变化
+        const obs = new OBserver(data)
+        console.log(obs)
+        //准备一个vm实例对象
+        let vm = {}
+        vm._data = data = obs
+
+        function  OBserver(obj) {
+
+            //汇总对象中所有属性形成一个数组
+            const keys = Object.keys(obj)
+            //遍历
+            keys.forEach((k)=>{
+                Object.defineProperty(this,k,{
+                    get() {
+                        return obj[k]
+                    },
+                    set(v) {
+                        console.log("${K}"+"发生改变,模板需要重新解析,生成虚拟dom")
+                        obj[k] = v
+                    }
+                })
+            })
+        }
+
+    </script>
+</head>
+<body>
+</body>
+</html>

@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script type="text/javascript" src="../../VueJs/vue.js"></script>
+    <!--设置ico-->
+    <link rel="shortcut icon" href="static/favicon.ico"/>
+</head>
+<body>
+<div id="root">
+<!--    <app></app>-->
+
+
+</div>
+<script type="text/javascript">
+
+    //创建student组件
+    const student = {
+        template: `<div>
+         <h2>hello,{{name}}</h2>
+        </div>`,
+        data(){
+            return{
+                name:'Student'
+            }
+        }
+    }
+
+    //创建school组件
+    const myschool = {
+        template: `<div>
+         <h2>hello,{{name}}</h2>
+         <student></student>
+        </div>`,
+        data(){
+            return{
+                name:'School'
+            }
+        },
+        //在组件中注册student组件(局部)
+        components: {
+            student
+        }
+    }
+
+    //创建hello组件
+    const hello = {
+        template:`<h1>{{msg}}</h1>`,
+        data(){
+            return{
+                msg:"Hello"
+            }
+        }
+    }
+
+    //创建app组件,此组件中注册所有其他组件
+    const app = {
+        template:`<div>
+            <hello></hello>
+            <school></school>
+        </div>`,
+        components:{
+            school:myschool,
+            hello
+        }
+    }
+
+    //创建vm
+    new Vue({
+        template:`<app></app>`,
+        el: "#root",
+        components:{
+            app
+        }
+    })
+</script>
+</body>
+</html>

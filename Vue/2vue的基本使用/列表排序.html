@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script type="text/javascript" src="../../VueJs/vue.js"></script>
+    <!--设置ico-->
+    <link rel="shortcut icon" href="static/favicon.ico"/>
+</head>
+<body>
+<div id="root">
+    <input type="text" placeholder="输入关键字查询" v-model="keyWord">
+    <button @click="sortType = 0">原顺序</button>
+    <button @click="sortType = 1">按年龄升序</button>
+    <button @click="sortType = 2">按年龄降序</button>
+    <ul :style="styleObject">
+        <li v-for="(p,index) in filterPersons" :key="p.id">
+            {{p.name}} - {{p.age}} - {{p.sex}}
+        </li>
+    </ul>
+</div>
+<script type="text/javascript">
+    new Vue({
+        el: "#root",
+        data: function () {
+            return {
+                <!--遍历数组-->
+                sortType:0,//0原顺序,1升序,2降序
+                keyWord: '',
+                persons: [
+                    {id: '001', name: "马冬梅", age: 58, sex: '女'},
+                    {id: '002', name: "周冬雨", age: 38, sex: '女'},
+                    {id: '003', name: "周杰伦", age: 28, sex: '男'},
+                    {id: '004', name: "温兆伦", age: 58, sex: '男'}
+                ],
+                styleObject: {
+                    listStyle: "none"
+                }
+            }
+        },
+        computed:{
+            filterPersons(){
+                const arr = this.persons.filter((p)=>{
+                    return p.name.indexOf(this.keyWord) !=-1;
+                })
+                //判断是否需要排序
+                if(this.sortType){
+                    arr.sort((a,b)=>{
+                       return this.sortType ==1 ? a.age - b.age : b.age - a.age;
+                    })
+                }
+                return arr;
+            }
+        }
+    })
+</script>
+</body>
+</html>

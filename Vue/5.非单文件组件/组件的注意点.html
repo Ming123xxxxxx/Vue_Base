@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script type="text/javascript" src="../../VueJs/vue.js"></script>
+    <!--设置ico-->
+    <link rel="shortcut icon" href="static/favicon.ico"/>
+</head>
+<body>
+<div id="root">
+    <!--正常写法-->
+    <my-school></my-school>
+    <!--简写方式,此方式没使用脚手架前会有bug-->
+    <my-school/>
+</div>
+<script type="text/javascript">
+
+    //正常写法
+    // const myschool = Vue.extend({
+    //
+    // })
+
+    //简写方式
+    const myschool = {
+        //name可使得vue开发工具中显示内容为name,并不改变其他
+        name: "ms",
+        template: `<div>
+         <h2>hello,{{name}}</h2>
+        </div>`,
+        data(){
+            return{
+                name:'Vue'
+            }
+        }
+    }
+
+
+    new Vue({
+        el: "#root",
+        components:{
+            //多单词组件命名
+            'my-school':myschool
+        }
+    })
+</script>
+</body>
+</html>

@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="../../VueJs\vue.js"></script>
+</head>
+<body>
+
+<div id="root">
+    <!--普通写法-->
+    单向数据绑定:<input type="text" v-bind:value="name"><br>
+    双向数据绑定:<input type="text" v-model:value="name"><br>
+
+    <!--简写-->
+    单向数据绑定:<input type="text" :value="name"><br>
+    双向数据绑定:<input type="text" v-model="name"><br>
+
+    <!--如何代码是错误的,因为v-model只能应用在表单元素(输入类元素)上-->
+  <h2 v-model:x="name">No</h2>
+</div>
+
+<script type="text/javascript">
+    Vue.config.productionTip = false;//阻止vue在启动时出现生产提示
+
+    //创建Vue实例
+    const x = new Vue({
+
+        el:'#root',//用于指定当前Vue实例为那个容器
+        data:{//data中用于存储数据,数据供el所指定的容器使用
+            name:"Hello,vue!",
+        }
+
+    });
+</script>
+
+</body>
+</html>

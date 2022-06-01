@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script type="text/javascript" src="../../VueJs/vue.js"></script>
+    <!--设置ico-->
+    <link rel="shortcut icon" href="static/favicon.ico"/>
+</head>
+<body>
+
+     <div id="root">
+         <h2>Hello,{{name}}</h2>
+     </div>
+
+     <script type="text/javascript">
+       const v = new Vue({
+             //el的第一种写法
+             // el:"#root",
+
+             //data的第一种写法:对象式
+             // data:{
+             //     name:"Vue"
+             // }
+
+             //data的第二种写法:函数式
+              data:function () {
+                  console.log("此处的this是:",this)//此处的this是Vue实例对象
+                  return {
+                     name:"Vue"
+                 }
+             }
+
+         })
+             //el的第二种写法
+             v.$mount('#root');
+     </script>
+
+
+</body>
+</html>

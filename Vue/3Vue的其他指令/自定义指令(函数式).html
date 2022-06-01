@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script type="text/javascript" src="../../VueJs/vue.js"></script>
+    <!--设置ico-->
+    <link rel="shortcut icon" href="static/favicon.ico"/>
+</head>
+<body>
+
+<div id="root">
+   <h2>当前的值是:<span v-text="n"></span></h2>
+    <!--自定义一个v-big指令,使其将数值放大10倍-->
+   <h2>放大10倍后的n值是:<span v-big="n"></span></h2>
+    <button @click="n++">n+1</button>
+</div>
+
+<div id="root2">
+    <h2>放大10倍后的m值是:<span v-big="m"></span></h2>
+    <button @click="m++">m+1</button>
+</div>
+
+<script type="text/javascript">
+
+    //定义一个全局指令
+    Vue.directive('big',function (element,binding) {
+        element.innerText = binding.value*10
+
+    })
+
+    new Vue({
+        el: "#root",
+        data: function () {
+            return {
+                n:1
+            }
+        },
+        //定义一个局部指令
+        directives:{
+            //自定义函数何时被调用,
+            //1.指令和元素成功绑定时
+            //2.当指令所在的模板被重新解析时
+            // big (element,binding) {
+            //     element.innerText = binding.value*10
+            //
+            // }
+        }
+    })
+
+    new Vue({
+        el:"#root2",
+        data:function () {
+            return{
+                m:10
+            }
+        }
+    })
+</script>
+</body>
+</html>

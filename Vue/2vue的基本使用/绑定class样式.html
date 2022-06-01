@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+        .basic {
+            border: 1px solid black;
+            height: 100px;
+            text-align: center;
+            line-height: 100px;
+            width: 500px;
+            margin: auto;
+        }
+        .sad {
+            background-color: darkgrey;
+            font-size: 20px;
+            font-weight: 800;
+
+        }
+        .surprise{
+            background-color: yellowgreen;
+            font-size: 40px;
+        }
+        .normal {
+            background-color: deepskyblue;
+            font-size: 40px;
+        }
+        .happy{
+            border-radius: 20px;
+        }
+    </style>
+    <script type="text/javascript" src="../../VueJs/vue.js"></script>
+    <!--设置ico-->
+    <link rel="shortcut icon" href="static/favicon.ico"/>
+</head>
+<body>
+
+<div id="root">
+    <!--绑定class样式,字符串写法,适用于样式的类名不确定,需要动态指定时-->
+    <div class="basic happy" :class="volatilo" @click="changeMood">Hello,{{name}}</div>
+    <br>
+    <br>
+    <!--绑定class样式,数组写法,适用于样式的类名不确定且个数也不确定时-->
+    <div class="basic" :class="ClassArr">Hello,{{name}}</div>
+    <br>
+    <br>
+    <!--绑定class样式,数组写法,适用于样式的类名确定且个数也确定,但要动态使用时-->
+    <div class="basic" :class="ClassObject">Hello,{{name}}</div>
+</div>
+
+<script type="text/javascript">
+    new Vue({
+        el: "#root",
+        data: function () {
+            return {
+                name: "Vue",
+                //字符串写法
+                volatilo: "surprise",
+                //数组写法
+                ClassArr:['normal','happy'],
+                //对象写法
+                ClassObject:{
+                    normal:false,
+                    happy:true,
+                    surprise:false
+                }
+            }
+        },
+        methods: {
+            changeMood() {
+                this.volatilo=="surprise"?this.volatilo='sad':this.volatilo='surprise'
+            }
+        }
+    })
+</script>
+</body>
+</html>

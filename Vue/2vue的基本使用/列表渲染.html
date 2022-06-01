@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script type="text/javascript" src="../../VueJs/vue.js"></script>
+    <!--设置ico-->
+    <link rel="shortcut icon" href="static/favicon.ico"/>
+</head>
+<body>
+<div id="root">
+    <ul :style="styleObject">
+        <!--:key:标记每一个列表节点的唯一标识-->
+        <!--这两种写法中 "in" 都可换成 "of"-->
+
+        <!--遍历数组-->
+        <!--此写法只找对象-->
+        <li v-for="p in persons" :key="p.id">姓名:{{p.name}} - 年龄:{{p.age}}</li>
+        <!--此写法中,Object是遍历找到的对象,index是索引值-->
+        <li v-for="(Object,indexs) in persons">person:{{Object}} === index:{{indexs}}</li>
+        <br>
+        <li>======================</li>
+        <br>
+
+        <!--遍历对象-->
+        <!--此写法只遍历对象中的每个key中的value-->
+        <li v-for="v in car" :key="v">{{v}}</li>
+        <!--此写法既可遍历key,又可遍历value-->
+        <li v-for="(value,keys) in car" :key="keys">value:{{value}} === key:{{keys}}</li>
+        <br>
+        <li>======================</li>
+        <br>
+
+        <!--遍历字符串-->
+        <li v-for="char in Strings">{{char}}</li>
+        <li v-for="(chars,index) in Strings" :key="index">char:{{chars}} === index:{{index}}</li>
+        <br>
+        <li>======================</li>
+        <br>
+
+        <!--遍历指定次数-->
+        <li v-for="n in 4">{{n}}</li>
+        <li v-for="(number,index) in 4">number:{{number}} === index:{{index}}</li>
+    </ul>
+</div>
+<script type="text/javascript">
+    new Vue({
+        el: "#root",
+        data: function () {
+            return {
+                <!--遍历数组-->
+                persons: [
+                    {id: '001', name: "张三", age: 18},
+                    {id: '002', name: "李四", age: 38},
+                    {id: '003', name: "王五", age: 48},
+                    {id: '004', name: "老六", age: 58}
+                ],
+                styleObject: {
+                    listStyle: "none"
+                },
+                <!--遍历对象-->
+                car:{
+                    name:"奔驰",
+                    price:"30w",
+                    color:"red"
+                },
+                <!--遍历字符串-->
+                Strings:"要是能重来"
+            }
+        }
+    })
+</script>
+</body>
+</html>

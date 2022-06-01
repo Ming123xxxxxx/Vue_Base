@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script type="text/javascript" src="../../../VueJs/vue.js"></script>
+    <!--设置ico-->
+    <link rel="shortcut icon" href="static/favicon.ico"/>
+</head>
+<body>
+
+<div id="root">
+    <h2>今天天气{{changeweather}}</h2>
+    <button @click="change">点我切换天气</button>
+    <h3>a:{{numbers.a}}</h3>
+    <h3>b:{{numbers.b}}</h3>
+    <button @click="numbers.a++">点我a+1</button>
+    <button @click="numbers.b++">点我b+1</button>
+</div>
+
+<script type="text/javascript">
+    const vm = new Vue({
+        el: "#root",
+        data: function () {
+            return {
+                isHot: false,
+                numbers: {
+                    a: 1,
+                    b: 2
+                }
+            }
+        },
+        methods: {
+            change() {
+                this.isHot = !this.isHot
+            }
+        },
+        computed: {
+            changeweather: function () {
+                return this.isHot ? "炎热" : "凉爽"
+            }
+        },
+        watch: {
+            numbers: {
+                deep:true,//开启深度监视:监视多级结构中所有属性的变化
+                handler(newValue, oldValue) {
+                    console.log("number发生改变", newValue, oldValue)
+
+                }
+            },
+
+            //监视多级结构中某个属性的变化
+            'numbers.a': {
+                handler(newValue, oldValue) {
+                    console.log("number.a发生改变", newValue, oldValue)
+
+                }
+            }
+        }
+    })
+</script>
+</body>
+</html>

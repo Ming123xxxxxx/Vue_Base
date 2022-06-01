@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script type="text/javascript" src="../../VueJs/vue.js"></script>
+    <!--设置ico-->
+    <link rel="shortcut icon" href="static/favicon.ico"/>
+</head>
+<body>
+<div id="root">
+    <!--v-show和v-if使用方式一样,但效果不同-->
+
+    <!--v-show,显示或隐藏元素,true显示,false隐藏,若写成变量,则会去data中寻找变量的Boolean值-->
+    <!--v-show做条件渲染,隐藏但还是在代码中存在,只是将隐藏元素style设置为display:none-->
+    <h2 v-show="true">Hello,{{name}}</h2>
+    <h2 v-show="false">Hello,{{author}}</h2>
+    <h2 v-show="a">Hello,{{address}}</h2>
+    <br>
+    <br>
+    <!--v-if做条件渲染,会使得元素彻底消失,代码中也不见了-->
+    <h2 v-if="false">v-if:flase</h2>
+    <h2 v-if="true">v-if:true</h2>
+    <h2 v-if="1==1">v-if:1==1</h2>
+    <h2 v-if="b">v-if:a,data:{a:{{b}}}</h2>
+    <br>
+    <!--推荐使用if和else-if的搭配,效率相对于都使用if要高些-->
+    <!--使用了(v-if和v-else-if),(v-if和v-else-if和else),(v-if和v-else)时,,要连在一起使用,中间不能有其他元素-->
+    <h2 v-if="c%3==0">Angular</h2>
+    <h2 v-if="c%3==1">React</h2>
+    <h2 v-if="c%3==2">Vue</h2>
+    <br>
+    <h2 v-if="c%3==0">Angular</h2>
+    <h2 v-else-if="c%3==1">React</h2>
+    <h2 v-else-if="c%3==2">Vue</h2>
+    <!--也可使用else-->
+    <h2 v-else>else</h2>
+    <br>
+    <!--v-if和template的搭配使用,这样可以不破坏结构-->
+    <template v-if="c%3==1">
+        <h2>a</h2>
+        <h2>b</h2>
+        <h2>c</h2>
+    </template>
+    <br>
+    <br>
+    <button @click="change">点我显示/隐藏=====c:{{c}}</button>
+</div>
+<script type="text/javascript">
+    new Vue({
+        el: "#root",
+        data: function () {
+            return {
+                name:"Vue",
+                author:"Ming",
+                address:"wuhan",
+                a:true,
+                b:true,
+                c:0,
+            }
+        },
+        methods:{
+            change(){
+                this.a=!this.a;
+                this.b=!this.b;
+                this.c=this.c+1
+            }
+        }
+    })
+</script>
+</body>
+</html>

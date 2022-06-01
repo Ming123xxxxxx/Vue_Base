@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script type="text/javascript" src="../../VueJs/vue.js"></script>
+    <!--设置ico-->
+    <link rel="shortcut icon" href="static/favicon.ico"/>
+</head>
+<body>
+<div id="root" style="border: 2px solid red">
+
+    <h2>全局组件:</h2>
+    <hello style="border: 2px solid blue"></hello>
+
+    <br>
+
+    <!--编写组件标签-->
+    <school style="border: 2px solid yellow"></school>
+
+    <br>
+    <!--体现组件复用-->
+    <h2> 组件复用:</h2>
+    <school style="border: 2px solid yellow"></school>
+    <br>
+
+    <!--编写组件标签-->
+    <student style="border: 2px solid salmon"></student>
+    <br>
+</div>
+<br>
+<br>
+<div id="root2" style="border: 2px solid yellowgreen">
+    <h2> 组件复用:</h2>
+    <student style="border: 2px solid salmon"></student>
+    <br>
+    <br>
+    <h2>全局组件:</h2>
+    <hello style="border: 2px solid blue"></hello>
+</div>
+<script type="text/javascript">
+
+    //创建hello组件
+    const hello = Vue.extend({
+        template: `
+            <div>
+                <h2>Hello,{{name}}</h2>
+            </div>`,
+        data: function () {
+            return{
+                name:'Vue'
+            }
+        }
+    })
+
+    //注册全局组件hello
+    //参数一:组件标签名,参数二:创建的组件名
+    Vue.component('hello',hello)
+
+    //创建School组件
+    const school = Vue.extend({
+        template: `
+            <div>
+                <h2>学校名称:{{SchoolNamme}}</h2>
+                <h2>学校地址:{{SchoolAddresss}}</h2>
+                <button @click="showInfo">点我提示学校名字</button>
+            </div>`,
+        //组件定义时一定不能写el配置项,因为最终所有组件都要被一个vm所管理,由vm决定服务于哪个容器
+        // el: "#root",
+        data: function () {
+            return {
+                SchoolNamme: "瑞昌一中",
+                SchoolAddresss: "瑞昌市"
+            }
+        },
+        methods: {
+            showInfo() {
+                alert("学校名为:瑞昌一中")
+            }
+        }
+    })
+
+    //创建student组件
+    const student = Vue.extend({
+        template: `
+            <div>
+                <h2>学生名称:{{StudentName}}</h2>
+                <h2>学生年龄,{{StudentAge}}</h2>
+            </div>`,
+        //组件定义时一定不能写el配置项,因为最终所有组件都要被一个vm所管理,由vm决定服务于哪个容器
+        // el: "#root",
+        data: function () {
+            return {
+                StudentName: "Ming",
+                StudentAge: 22
+            }
+        }
+    })
+
+    //创建vm
+    new Vue({
+        el: "#root",
+        //注册组件(局部注册)
+        components: {
+            //正常key:value形式,key为组件标签名,value为创建的组件名
+            student: student,
+            //简写形式,组件标签名为创建的组件名
+            school
+        }
+    })
+
+    //在创建一个vm，体现组件的复用
+    new Vue({
+        el:"#root2",
+        components: {
+            student
+        }
+    })
+
+</script>
+</body>
+</html>
